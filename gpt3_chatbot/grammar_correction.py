@@ -1,8 +1,4 @@
 import openai
-#def load_key():
-#    with open("openai-key.txt", "r", encoding="utf-8") as f:
-#        return f.readline()
-#openai.api_key = load_key()
 
 
 class GrammarChecker:
@@ -13,7 +9,9 @@ class GrammarChecker:
         elif language == "English":
             self.correction_string = "Fix the spelling."
         elif language == "Spanish":
-            self.correction_string = "¡Corrige la ortografía y la gramática!" 
+            self.correction_string = "¡Corrige la ortografía y la gramática (si hay errores)!" 
+        elif language == "Czech":
+            self.correction_string = "Opravte pravopisné chyby!"
 
     # Check if the input is correct
     def check(self, input: str) -> str:

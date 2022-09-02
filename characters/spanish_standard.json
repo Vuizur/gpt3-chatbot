@@ -1,0 +1,7 @@
+{
+    "STARTING_PROMPT": "Una conversación entre una chica y un hombre.",
+    "STARTING_REQUEST": "Habla!",
+    "USER_PREFIX": "C: ",
+    "AI_PREFIX": "H:",
+    "LANGUAGE": "Spanish"
+}

@@ -1,70 +1,12 @@
 import openai
 import colorama
-
+from helper_functions import load_key
+from helper_functions import load_config_json
 from grammar_correction import GrammarChecker
 
-ENGLISH_THERAPIST_SETTINGS = {
-    "STARTING_PROMPT": "A conversation between a patient and a helpful and very nice psychotherapist.",
-    "STARTING_REQUEST": "Ask the therapist a question!",
-    "MAX_NUM_USER_INPUTS": 3,
-    "USER_PREFIX": "P: ",
-    "AI_PREFIX": "PT:",
-    "CUT_DIALOGUE_PLACEHOLDER": "...",
-    "FREQUENCY_PENALTY": 1,
-    "PRESENCE_PENALTY": 1,
-    "MAX_TOKENS": 120,
-}
-GERMAN_THERAPIST_SETTINGS = {
-    "STARTING_PROMPT": "Ein Gespräch zwischen einem Patienten und einer sehr hilfreichen und netten Psychotherapeutin.",
-    "STARTING_REQUEST": "Frage die Therapeutin etwas!",
-    "MAX_NUM_USER_INPUTS": 3,
-    "USER_PREFIX": "P: ",
-    "AI_PREFIX": "PT:",
-    "CUT_DIALOGUE_PLACEHOLDER": "...",
-    "FREQUENCY_PENALTY": 1,
-    "PRESENCE_PENALTY": 1,
-    "MAX_TOKENS": 120,
-}
-GERMAN_PROFESSOR_SETTINGS = {
-    "STARTING_PROMPT": "Ein Gespräch zwischen einem Studenten und einem extrem gebildeten und hilfreichen Professor.",
-    "STARTING_REQUEST": "Frage den Professor etwas!",
-    "MAX_NUM_USER_INPUTS": 3,
-    "USER_PREFIX": "S: ",
-    "AI_PREFIX": "P:",
-    "CUT_DIALOGUE_PLACEHOLDER": "...",
-    "FREQUENCY_PENALTY": 1,
-    "PRESENCE_PENALTY": 1,
-    "MAX_TOKENS": 120,
-}
-PROPAGANDA_SETTINGS = {
-    "STARTING_PROMPT": "Ein Gespräch zwischen einem Mann und einer jungen Frau.",
-    "STARTING_REQUEST": "Chatte!",
-    "MAX_NUM_USER_INPUTS": 3,
-    "USER_PREFIX": "M: ",
-    "AI_PREFIX": "F:",
-    "CUT_DIALOGUE_PLACEHOLDER": "...",
-    "FREQUENCY_PENALTY": 1,
-    "PRESENCE_PENALTY": 1,
-    "MAX_TOKENS": 120,
-}
-SPANISH_ROBOT_SETTINGS = {
-    "STARTING_PROMPT": "Una conversación entre una chica y un hombre.",
-    "STARTING_REQUEST": "Habla!",
-    "MAX_NUM_USER_INPUTS": 3,
-    "USER_PREFIX": "P: ",
-    "AI_PREFIX": "R:",
-    "CUT_DIALOGUE_PLACEHOLDER": "...",
-    "FREQUENCY_PENALTY": 1,
-    "PRESENCE_PENALTY": 1,
-    "MAX_TOKENS": 120,
-}
 
-SETTINGS_DICT = SPANISH_ROBOT_SETTINGS
-
-
-def load_key():
-    with open("openai-key.txt", "r", encoding="utf-8") as f:
-        return f.readline()
+SETTINGS_DICT = load_config_json("characters/spanish_standard.json")
+FIX_ERRORS = True
 
 
 class Conversation:
@@ -112,7 +54,8 @@ class Conversation:
 
 def start_conversation():
     openai.api_key = load_key()
-    grammar_checker = GrammarChecker("Spanish")
+    if FIX_ERRORS:
+        grammar_checker = GrammarChecker(SETTINGS_DICT["LANGUAGE"])
 
     conversation = Conversation(SETTINGS_DICT["MAX_NUM_USER_INPUTS"])
 
@@ -121,10 +64,10 @@ def start_conversation():
         user_input = input(colorama.Fore.YELLOW)
         prompt = conversation.get_prompt(user_input)
 
-        #print(colorama.Fore.RESET, end="")
-        checked_prompt = grammar_checker.check(user_input.strip()).strip()
-        if checked_prompt != user_input.strip():
-            print(colorama.Fore.RED + f"Correct: {checked_prompt}" + colorama.Fore.RESET)
+        if FIX_ERRORS:
+            checked_prompt = grammar_checker.check(user_input.strip()).strip()
+            if checked_prompt != user_input.strip():
+                print(colorama.Fore.RED + f"Correct: {checked_prompt}" + colorama.Fore.RESET)
 
         completion = openai.Completion.create(
             model="text-davinci-002",
@@ -146,3 +89,4 @@ def start_conversation():
 
 if __name__ == "__main__":
     start_conversation()
+    

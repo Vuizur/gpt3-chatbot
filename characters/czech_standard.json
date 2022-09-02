@@ -1,0 +1,7 @@
+{
+    "STARTING_PROMPT": "Rozhovor mezi mužem a ženou.",
+    "STARTING_REQUEST": "Řekněte něco!",
+    "USER_PREFIX": "M: ",
+    "AI_PREFIX": "Ž:",
+    "LANGUAGE": "Czech"
+}

@@ -1,0 +1,7 @@
+{
+    "STARTING_PROMPT": "Ein Gespräch zwischen einem Patienten und einer sehr hilfreichen und netten Psychotherapeutin.",
+    "STARTING_REQUEST": "Frage die Therapeutin etwas!",
+    "USER_PREFIX": "P: ",
+    "AI_PREFIX": "PT:",
+    "LANGUAGE": "German"
+}
