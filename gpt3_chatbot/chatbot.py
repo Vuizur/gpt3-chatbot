@@ -5,7 +5,9 @@ from helper_functions import load_config_json
 from grammar_correction import GrammarChecker
 
 
-SETTINGS_DICT = load_config_json("characters/spanish_standard.json")
+#SETTINGS_DICT = load_config_json("characters/spanish_standard.json")
+SETTINGS_DICT = load_config_json("characters/default.json")
+
 FIX_ERRORS = True
 
 
