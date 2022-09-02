@@ -67,7 +67,11 @@ def start_conversation():
         if FIX_ERRORS:
             checked_prompt = grammar_checker.check(user_input.strip()).strip()
             if checked_prompt != user_input.strip():
-                print(colorama.Fore.RED + f"Correct: {checked_prompt}" + colorama.Fore.RESET)
+                print(
+                    colorama.Fore.RED
+                    + f"Correct: {checked_prompt}"
+                    + colorama.Fore.RESET
+                )
 
         completion = openai.Completion.create(
             model="text-davinci-002",
@@ -89,4 +93,3 @@ def start_conversation():
 
 if __name__ == "__main__":
     start_conversation()
-    

@@ -2,7 +2,9 @@
 import json
 
 
-def load_config_json(file_path: str = None, DEFAULT_JSON_PATH = "characters/default.json") -> dict[str, any]:
+def load_config_json(
+    file_path: str = None, DEFAULT_JSON_PATH="characters/default.json"
+) -> dict[str, any]:
     # Load the default settings into a dictionary
     json_dict: dict[str, any] = {}
     with open(DEFAULT_JSON_PATH, "r", encoding="utf-8") as f:
