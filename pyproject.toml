@@ -8,6 +8,10 @@ authors = ["Vuizur <Vuizur@users.noreply.github.com>"]
 python = "^3.10,<3.11"
 openai = "^0.22.1"
 colorama = "^0.4.5"
+pyaudio = "^0.2.12"
+speechrecognition = "^3.8.1"
+edge-tts = "^5.0.6"
+playsound = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
