@@ -1,0 +1,7 @@
+{
+    "STARTING_PROMPT": "A conversation between a man and a tax collector.",
+    "STARTING_REQUEST": "Say something!",
+    "USER_PREFIX": "M: ",
+    "AI_PREFIX": "R:",
+    "LANGUAGE": "English"
+}
